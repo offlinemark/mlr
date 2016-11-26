@@ -1,0 +1,32 @@
+write a rust app
+
+user can
+1 open acct
+    enter iniital balance
+    1 deposit - print out acct after depo
+    2 withdraw  - print out acct after withdr
+    3 compound interest
+        principl
+        interest
+        times compounded yearly
+        num years
+
+        // calculate
+        result = principal * pow((1 + (interest/compounds)), (compounds * years));
+
+        print annual comp inter
+
+2 run mortage calculator
+    loan amt
+    fixed monthly interst
+    num monthly payments
+
+
+    double intermediate = pow(1 + interest, numPayments);
+    resultesult = (loanAmount * interest * intermediate)/(intermediate - 1);
+
+    comput << "\nMonthly Payment: " << result << endl;
+
+    print the monthly payment
+
+
