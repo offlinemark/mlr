@@ -1,6 +1,19 @@
+use std::fmt;
 use std::io;
 use std::io::Write;
 use std::io::Read;
+
+#[derive(Debug, PartialEq)]
+enum BankError {
+    ParseError,
+    IoError
+}
+
+impl fmt::Display for BankError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "yung bankerror")
+    }
+}
 
 fn print_greeting() {
     println!("hi welcome to the bank :)");
@@ -11,7 +24,7 @@ fn print_greeting() {
     io::stdout().flush().unwrap();
 }
 
-fn get_line<R>(input: R) -> Result<String, String> where R: Read {
+fn get_line<R>(input: R) -> Result<String, BankError> where R: Read {
     let mut buf = String::new();
     for b in input.bytes() {
         match b {
@@ -22,18 +35,18 @@ fn get_line<R>(input: R) -> Result<String, String> where R: Read {
                 }
                 buf.push(c);
             }
-            Err(_) => return Err("IO Error".to_owned())
+            Err(_) => return Err(BankError::IoError)
         }
     }
     Ok(buf)
  }
 
-fn get_input<T, R>(stdin: R) -> Result<T, String> where
+fn get_input<T, R>(stdin: R) -> Result<T, BankError> where
     T: std::str::FromStr,
     R: Read
 {
     let line = get_line(stdin)?;
-    line.trim().parse::<T>().map_err(|_| "Parse Error".to_owned())
+    line.trim().parse::<T>().map_err(|_| BankError::ParseError)
 }
 
 fn bank(input: i8) {
@@ -68,7 +81,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::{get_input, get_line};
+    use super::{get_input, get_line, BankError};
 
     #[test]
     fn gi_pos() {
@@ -86,7 +99,7 @@ mod tests {
     fn gi_err() {
         let test = "asdf\n";
         let y =  get_input::<i8, &[u8]>(test.as_bytes());
-        assert_eq!("Parse Error", y.unwrap_err());
+        assert_eq!(BankError::ParseError, y.unwrap_err());
     }
 
     #[test]
