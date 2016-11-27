@@ -89,7 +89,7 @@ mod tests {
     fn gi_err() {
         let test = "asdf\n";
         let y =  get_input::<i8, &[u8]>(test.as_bytes());
-        assert!(y.is_err());
+        assert_eq!("Parse Error", y.unwrap_err());
     }
 
     #[test]
