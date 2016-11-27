@@ -11,7 +11,7 @@ enum BankError {
 
 impl fmt::Display for BankError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "yung bankerror")
+        fmt::Debug::fmt(self, f)
     }
 }
 
