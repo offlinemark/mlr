@@ -73,4 +73,32 @@ fn main() {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::{get_input, get_line};
 
+    #[test]
+    fn gi_pos() {
+        let test = "1\n";
+        assert_eq!(1, get_input::<i8, &[u8]>(test.as_bytes()).unwrap());
+    }
+
+    #[test]
+    fn gi_neg() {
+        let test = "-1\n";
+        assert_eq!(-1, get_input::<i8, &[u8]>(test.as_bytes()).unwrap());
+    }
+
+    #[test]
+    fn gi_err() {
+        let test = "asdf\n";
+        let y =  get_input::<i8, &[u8]>(test.as_bytes());
+        assert!(y.is_err());
+    }
+
+    #[test]
+    fn gl() {
+        let test = "asdf\n".as_bytes();
+        assert_eq!("asdf", get_line(test).unwrap());
+    }
+}
