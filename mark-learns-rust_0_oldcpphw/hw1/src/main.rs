@@ -32,7 +32,7 @@ fn get_input<T, R>(stdin: R) -> Result<T, String> where
     T: std::str::FromStr,
     R: Read
 {
-    let line = try!(get_line(stdin));
+    let line = get_line(stdin)?;
     line.trim().parse::<T>().map_err(|_| "Parse Error".to_owned())
 }
 
