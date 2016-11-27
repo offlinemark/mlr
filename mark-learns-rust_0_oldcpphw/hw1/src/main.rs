@@ -33,10 +33,7 @@ fn get_input<T, R>(stdin: R) -> Result<T, String> where
     R: Read
 {
     let line = try!(get_line(stdin));
-    match line.trim().parse::<T>() {
-        Ok(num) => Ok(num),
-        Err(_) => Err("Parse Error".to_owned())
-    }
+    line.trim().parse::<T>().map_err(|_| "Parse Error".to_owned())
 }
 
 fn bank(input: i8) {
