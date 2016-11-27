@@ -17,7 +17,7 @@ impl fmt::Display for BankError {
 
 fn print_greeting() {
     println!("hi welcome to the bank :)");
-    println!("choose and option:");
+    println!("choose an option:");
     println!("1: open an account");
     println!("2: open mortage calculator");
     print!("> ");
