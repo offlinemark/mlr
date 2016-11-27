@@ -32,14 +32,10 @@ fn get_input<T, R>(stdin: R) -> Result<T, String> where
     T: std::str::FromStr,
     R: Read
 {
-    match get_line(stdin) {
-        Ok(buf) => {
-            match buf.trim().parse::<T>() {
-                Ok(num) => Ok(num),
-                Err(_) => Err("Parse Error".to_owned())
-            }
-        }
-        Err(e) => Err(e)
+    let line = try!(get_line(stdin));
+    match line.trim().parse::<T>() {
+        Ok(num) => Ok(num),
+        Err(_) => Err("Parse Error".to_owned())
     }
 }
 
