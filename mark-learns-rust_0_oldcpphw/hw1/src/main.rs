@@ -22,7 +22,7 @@ fn get_line<R>(input: R) -> Result<String, String> where R: Read {
                 }
                 buf.push(c);
             }
-            Err(_) => return Err(String::from("IO Error"))
+            Err(_) => return Err("IO Error".to_owned())
         }
     }
     Ok(buf)
@@ -36,7 +36,7 @@ fn get_input<T, R>(stdin: R) -> Result<T, String> where
         Ok(buf) => {
             match buf.trim().parse::<T>() {
                 Ok(num) => Ok(num),
-                Err(_) => Err(String::from("Parse Error"))
+                Err(_) => Err("Parse Error".to_owned())
             }
         }
         Err(e) => Err(e)
